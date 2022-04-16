@@ -1,6 +1,6 @@
 # printf Project
 Implementing printf function
-The printf function prints data to the standard output
+The printf function prints data to the standard output in regards to a specified format
 
 # Prototype
 int _printf(const char *format, ...);
