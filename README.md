@@ -1,5 +1,6 @@
 # printf Project
 Implementing printf function
+The printf function prints data to the standard output
 
 # Prototype
 int _printf(const char *format, ...);
@@ -16,3 +17,4 @@ int _printf(const char *format, ...);
 * _printf("Hello, ALX\n") prints "Hello, ALX", followed by a new line
 * _printf("%s", "Heya") prints "Heya"
 * _printf("This is a number: %d", 98) prints "This is a number: 98"
+* _printf("%w", "Project") prints "Project"
