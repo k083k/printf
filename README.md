@@ -15,4 +15,4 @@ int _printf(const char *format, ...);
 
 * _printf("Hello, ALX\n") prints "Hello, ALX", followed by a new line
 * _printf("%s", "Heya") prints "Heya"
-* _printf("This is a number: %d", 42) prints "This is a number: 42"
+* _printf("This is a number: %d", 98) prints "This is a number: 98"
