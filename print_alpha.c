@@ -52,3 +52,33 @@ int print_perc(va_list arg)
 	_putchar('%');
 	return (1);
 }
+
+/**
+ * print_rev_str - print reverse string
+ * @arg: argument of type va_list
+ * Return: count
+ */
+
+int print_rev_str(va_list arg)
+{
+	char *str;
+	int i = 0, count = 0, len;
+
+	str = va_arg(arg, char *);
+	if (str == NULL)
+	{
+		str = "(llun(";
+	}
+	for (i = 0; str[i]; i++)
+	{
+		;
+	}
+	len = i - 1;
+	while (len >= 0)
+	{
+		_putchar(str[len]);
+		len--;
+		count++;
+	}
+	return (count);
+}
