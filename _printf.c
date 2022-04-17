@@ -25,14 +25,14 @@ int _printf(const char *format, ...)
 		}
 		if (*(format + i) == '%')
 		{
-			fun = check_func(*(format + (i +1)), arg);
+			fun = check_func(*(format + (i + 1)), arg);
 			if (fun != 0)
 			{
 				count = count + fun;
 				i = i + 2;
 				continue;
 			}
-		
+
 			if (*(format + (i + 1)) == '\0')
 			{
 				_putchar(*(format + i));
