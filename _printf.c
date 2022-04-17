@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 		}
 		if (*(format + i) == '%')
 		{
-			fun = check_char_func(*(format + (i +1)), arg);
+			fun = check_func(*(format + (i +1)), arg);
 			if (fun != 0)
 			{
 				count = count + fun;
