@@ -28,6 +28,6 @@ int print_perc(va_list arg);
 int print_integer(va_list arg);
 int check_func(const char s, va_list ap);
 int print_rev_str(va_list arg);
-
+int print_bin(va_list arg);
 
 #endif
