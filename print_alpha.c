@@ -68,7 +68,7 @@ int print_rev_str(va_list arg)
 	str = va_arg(arg, char *);
 	if (str == NULL)
 	{
-		str = "(llun(";
+		str = ")llun(";
 	}
 	for (i = 0; str[i]; i++)
 	{
