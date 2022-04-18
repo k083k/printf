@@ -17,4 +17,4 @@ int _printf(const char *format, ...);
 * _printf("Hello, ALX\n") prints "Hello, ALX", followed by a new line
 * _printf("%s", "Heya") prints "Heya"
 * _printf("This is a number: %d", 98) prints "This is a number: 98"
-* _printf("%w", "Project") prints "Project"
+* _printf("%s", "Project") prints "Project"
