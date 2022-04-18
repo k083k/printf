@@ -15,7 +15,8 @@ int check_func(const char s, va_list ap)
 		{'s', print_str},
 		{'%', print_perc},
 		{'d', print_integer},
-		{'i', print_integer}
+		{'i', print_integer},
+		{'b', print_bin}
 	};
 	while (ch[i].c != 0)
 	{
