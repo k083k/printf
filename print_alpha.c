@@ -63,23 +63,22 @@ int print_perc(va_list arg)
 int print_rev_str(va_list arg)
 {
 	char *str;
-	int i = 0, count = 0, len;
+	int i = 0, count = 0;
 
 	str = va_arg(arg, char *);
-	if (str == NULL)
+	if (!str)
 	{
-		str = ")llun(";
+		str = "(null)";
 	}
-	for (i = 0; str[i]; i++)
+
+	while (str[i])
 	{
-		;
+		i++;
 	}
-	len = i - 1;
-	while (len >= 0)
+
+	for (count = i - 1; count >= 0; count--)
 	{
-		_putchar(str[len]);
-		len--;
-		count++;
+		_putchar(str[count]);
 	}
-	return (count);
+	return (i);
 }
