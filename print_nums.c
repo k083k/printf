@@ -43,6 +43,7 @@ int print_bin(va_list arg)
 	unsigned int x, y, i, sum;
 	unsigned int a[32];
 	int count;
+
 	x = va_arg(arg, unsigned int);
 	y = 2147483648;
 	a[0] = x / y;
@@ -53,7 +54,7 @@ int print_bin(va_list arg)
 	}
 	for (i = 0, sum = 0, count = 0; i < 32; i++)
 	{
-		sum = sum +a[i];
+		sum = sum + a[i];
 		if (sum || i == 31)
 		{
 			_putchar('0' + a[i]);
