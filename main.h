@@ -1,9 +1,10 @@
-#ifndef PRINTF_H
-#define PRINTF_H
+#ifndef PRINT_F
+#define PRINT_F
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 /**
  * struct printf - structure for printf
