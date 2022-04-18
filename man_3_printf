@@ -1,0 +1,196 @@
+_PRINTF(3)     ALX Programmer's Manual    _PRINTF(3)
+
+NAME
+
+         _printf - formatted output conversion and print data
+                  (Own version)
+
+
+SYNOPSIS
+
+         #include "main.h"
+         int _printf (const char * const format,...);
+
+
+DESCRIPTION
+
+The _printf function is a variable function that receives as a
+formal argument a constant char pointer "format", writes its
+characters "exactly the same" in the standard output using the
+write function and returns an integer, which is the number of
+characters that were sent to stdout without taking null characters into account.
+
+Use format specifiers to give specific instructions of what you
+want to write. The '%' specifier allows you to give the location and
+the type of data you want in the stdout, this allows
+us to write in the stdout variadic arguments of different types
+of data, which are received by the function after "format ".
+
+   Specifiers
+
+| %c | Prints a character type data.
+
+| %s | Prints a data type 'char *'.
+
+| %d | Prints an integer data type.
+
+| %i | Prints an integer data type.
+
+| %u | prints an integer unsigned data.
+
+| %b | prints an integer convert to binary format.
+
+| %o | prints an integer convert to octal format.
+
+| %x | prints an integer convert to hexadecimal format, letters lower case.
+
+| %X | prints an integer convert to hexadecimal format, letters upper case.
+
+
+   Return Value
+
+When successful the _printf function returns the number of characters written
+in the standard output.
+
+When the function finds a NULL value for the format argument it returns -1.
+
+When the function finds a NULL value after the specifier character %
+it returns -1.
+
+When the function finds one or more spaces between the % character and a specifer,
+write just one space before write the convert data, and omit the others spaces.
+
+
+   Internal functions
+
+To write the FORMAT in the stdout _printf needs to convert the variatic arguments
+in caracter to fill a buffer before print the information.
+
+      ---Function print_char():---
+To print characters the _printf () function must first receive the% c specifier
+that calls the print_char function, this function saves the character in a char
+type variable. After saving it, copies this character in the buffer and return 1.
+
+The print_char function prototype is the next:
+
+int print_char(va_list arg);
+
+Example:
+
+char character = 'A';
+
+_print ("%c", character);
+
+stdout: A
+
+
+      ---Functions print_str():---
+To print integers the function _printf must make a conversion from the string
+to characters, it does so by calling the internal function print_string, which
+runs through the string given as a variatic argument and assigns each character
+of it in a position of the buffer, then returns the number of positioned
+characters.
+
+The print_string function prototype is the next:
+
+int print_string(va_list arg);
+
+Example:
+
+char string = "ALX";
+
+_print ("%s", string);
+
+stdout: ALX
+
+      ---Function print_integer():---
+To print integers the function _printf() must make a conversion of each digit
+of the integer to a character, it does so by calling the internal function
+print_int, this calculates the number of digits of the integer to allocate
+a memory space with the same amount in bytes to a "variable" pointer to char,
+and to each position it assigns an integer digit in the corresponding position.
+Once this part is done, it copies the character digits in the buffer, frees
+the allocated memory and returns the number of digits written.
+
+The print_integer function prototype is the next:
+
+int print_integer(va_list a);
+
+Example:
+
+int number = 12345;
+
+_print ("%d", number);
+
+stdout: 12345
+
+      -Function print_u_int:
+To print unsigned integers the function _printf () must make a conversion of each digit of the integer to a character, it does so by calling the internal function print_u_int, this calculates the number of digits of the integer to allocate a memory space with the same amount in bytes to a "variable" pointer to char, and to each position it assigns an integer digit in the corresponding position. Once this part is done, it writes to the standard of this "variable", frees the allocated memory and returns the number of digits written.
+
+The print_u_int function prototype is the next:
+
+int print_u_int(va_list a, char buffer, int index);
+
+Example:
+
+int number = 12345;
+
+_print ("%d", number);
+
+stdout: 12345
+
+      -Function print_binaries
+to print binaries the _printf () function must first receive the specifier% b that calls the print_binary function, this function saves the integer in a variable type unsigned int, after saving the integer it creates a loop that divides it by 2 until it gives us 0 to find the size in bytes of the binary, that size is saved in a malloc that will be used to save the binary in characters, finally it makes a loop so that it is saved in the buffer the binary number in the correct order. free up the wild memory and return the number of digits written.
+
+The print_binary function prototype is the next:
+
+int print_binary(va_list a, char * buffer, int index);
+
+Example:
+
+unsigned int binary = 98;
+
+_print ("%b", binary);
+
+stdout: 1100010
+
+      -Function print_octal
+
+To print octals, the _printf () function must first receive the specifier% or that the print_octal function calls, this function saves the integer in a variable type unsigned int, after saving the integer it creates a loop that divides it into 8 until it gives us 0 to find the size in bytes of the octal, that size is saved in a malloc that will be used to save the octal in characters, finally it makes a loop so that it is saved in the buffer the octal number in the correct order. free up the wild memory and return the number of digits written.
+
+The print_octal function prototype is the next:
+
+int print_octal(va_list a, char * buffer, int index);
+
+Example:
+
+unsigned int octal = 1455;
+
+_print ("%o", octal);
+
+stdout: 2657
+
+      -Function print_x_hexal
+
+To print hexadecimals the _printf () function must first receive the% x specifier that calls the print_x_hexal function, this function saves the integer in a variable type unsigned int, after saving the integer it creates a loop that divides it into 16 until it gives us 0 to find the size in bytes of the hexadecimal, that size is saved in a malloc that will be used to save the hexadecimal in characters, finally it makes a loop so that the hexadecimal number is stored in the buffer in the correct order. frees the wild memory and returns the number of digits written.
+
+The print_x_hexal function prototype is the next:
+
+int print_x_hexal(va_list a, char * buffer, int index);
+
+int print_X_hexal(va_list a, char * buffer, int index);
+
+Example:
+
+unsigned int hexadecimal= 2021;
+
+_print ("%x ", hexadecimal);
+
+_print ("%X", hexadecimal);
+
+stdout:
+7e5
+7E5
+
+AUTHOR
+         Kwabena O. Frempong-Kore, Martha Klenam Tsagli
