@@ -1,46 +1,50 @@
 #include "main.h"
 
 /**
- * _printf - print all (printf recreation)
- * @format: format specifier
- * Return: count
+ *_printf - Print a formatted string
+ *@format: format string
+ *Return: number of characters printed
  */
-
 int _printf(const char *format, ...)
 {
-	va_list arg;
-	int i = 0, count = 0, fun = 0;
+	int count = 0;
+	va_list list;
+	char *pointer, *start;
+	param_func flags = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-	if (!format || (format[0] == '%' && format[1] == '\0'))
-	{
+	va_start(list, format);
+
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	}
-	va_start(arg, format);
-	while (*(format + i) && format)
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (pointer = (char *)format; *pointer; pointer++)
 	{
-		if (*(format + i) != '%')
+		init_params(&flags, list);
+		if (*pointer != '%')
 		{
-			_putchar (*(format + i));
-			count++;
+			count += _putchar(*pointer);
+			continue;
 		}
-		if (*(format + i) == '%')
+		start = pointer;
+		pointer++;
+		while (get_flags(pointer, &flags))
 		{
-			fun = check_func(*(format + (i + 1)), arg);
-			if (fun != 0)
-			{
-				count = count + fun;
-				i = i + 2;
-				continue;
-			}
+			pointer++;
+		}
+		pointer = get_width(pointer, &flags, list);
+		pointer = get_precision(pointer, &flags, list);
+		if (get_mods(pointer, &flags))
+			pointer++;
 
-			if (*(format + (i + 1)) == '\0')
-			{
-				_putchar(*(format + i));
-				count++;
-			}
-		}
-		i++;
+		if (!func_parse(pointer))
+			count += print_range(start, pointer,
+			flags.l_mod || flags.h_mod ? pointer - 1 : 0);
+		else
+			count += print_func(pointer, list, &flags);
 	}
-	va_end(arg);
+	_putchar(-1);
+	va_end(list);
 	return (count);
 }
+
