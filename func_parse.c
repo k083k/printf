@@ -26,6 +26,7 @@ int (*func_parse(char *c))(va_list list, param_func * func)
 	    {"%", print_percentage},
 	    {"p", print_address},
 	    {"R", print_rot13},
+	    {"r", print_reverse},
 	    {NULL, NULL}
 
 	};
