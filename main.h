@@ -1,5 +1,5 @@
-#ifndef PRINT_F
-#define PRINT_F
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -91,4 +91,3 @@ int print_func(char *s, va_list list, param_func *func);
 int print_left_shift(char *str, param_func *func);
 int _strlen(char *s);
 #endif
-
