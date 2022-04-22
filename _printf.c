@@ -1,50 +1,49 @@
 #include "main.h"
 
 /**
- *_printf - Print a formatted string
- *@format: format string
- *Return: number of characters printed
+ * _printf - prints anything
+ * @format: the format string
+ *
+ * Return: number of bytes printed
  */
 int _printf(const char *format, ...)
 {
-	int count = 0;
-	va_list list;
-	char *pointer, *start;
-	param_func flags = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	int sum = 0;
+	va_list ap;
+	char *p, *start;
+	params_t params = PARAMS_INIT;
 
-	va_start(list, format);
+	va_start(ap, format);
 
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
-	for (pointer = (char *)format; *pointer; pointer++)
+	for (p = (char *)format; *p; p++)
 	{
-		init_params(&flags, list);
-		if (*pointer != '%')
+		init_params(&params, ap);
+		if (*p != '%')
 		{
-			count += _putchar(*pointer);
+			sum += _putchar(*p);
 			continue;
 		}
-		start = pointer;
-		pointer++;
-		while (get_flags(pointer, &flags))
+		start = p;
+		p++;
+		while (get_flag(p, &params)) /* while char at p is flag char */
 		{
-			pointer++;
+			p++; /* next char */
 		}
-		pointer = get_width(pointer, &flags, list);
-		pointer = get_precision(pointer, &flags, list);
-		if (get_mods(pointer, &flags))
-			pointer++;
-
-		if (!func_parse(pointer))
-			count += print_range(start, pointer,
-			flags.l_mod || flags.h_mod ? pointer - 1 : 0);
+		p = get_width(p, &params, ap);
+		p = get_precision(p, &params, ap);
+		if (get_modifier(p, &params))
+			p++;
+		if (!get_specifier(p))
+			sum += print_from_to(start, p,
+				params.l_modifier || params.h_modifier ? p - 1 : 0);
 		else
-			count += print_func(pointer, list, &flags);
+			sum += get_print_func(p, ap, &params);
 	}
-	_putchar(-1);
-	va_end(list);
-	return (count);
+	_putchar(BUF_FLUSH);
+	va_end(ap);
+	return (sum);
 }
-
